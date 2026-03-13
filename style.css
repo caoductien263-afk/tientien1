@@ -1,0 +1,120 @@
+/* --- CẤU TRÚC CƠ BẢN --- */
+body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f2f2f2; color: #333; padding-bottom: 80px; -webkit-tap-highlight-color: transparent; }
+
+/* --- HEADER --- */
+.header { background-color: #00897B; padding: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.2); display: flex; gap: 8px; align-items: center; }
+select { flex: 1; padding: 8px; border-radius: 6px; border: none; font-size: 15px; background: white; color: #333; outline: none; height: 40px; }
+
+/* NÚT BẤM HEADER */
+.btn-add, .btn-settings, .btn-toggle-eye, .btn-stats { border: none; border-radius: 6px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: 40px; display: flex; align-items: center; justify-content: center; }
+.btn-add { background: #ffffff; color: #00897B; font-size: 24px; width: 40px; }
+.btn-settings { background: #00695c; color: white; font-size: 18px; width: 40px; }
+.btn-toggle-eye { background: #ffca28; color: #333; font-size: 18px; width: 40px; }
+.btn-stats { background: #1976D2; color: white; font-size: 18px; width: 40px; }
+.btn-add:active, .btn-settings:active, .btn-toggle-eye:active, .btn-stats:active { transform: scale(0.95); }
+
+/* --- THANH CÔNG CỤ CHE CHỮ --- */
+.vocab-toolbar { background: #e0f2f1; padding: 12px 15px; border-bottom: 2px solid #00897B; animation: slideDown 0.3s ease-out; }
+.toolbar-title { color: #00695c; font-size: 14px; font-weight: bold; text-align: center; margin-bottom: 10px; }
+.checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.checkbox-group label { background: #ffffff; padding: 6px 12px; border-radius: 20px; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px; color: #00695c; font-weight: bold; border: 1px solid #b2dfdb; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.checkbox-group input { cursor: pointer; transform: scale(1.2); }
+
+/* --- KHUNG NHẬP LIỆU & CÀI ĐẶT --- */
+.input-container { background: #ffffff; margin: 15px auto; padding: 20px; border-radius: 12px; border: 2px solid #00897B; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: none; max-width: 800px;}
+.input-container.show { display: block; animation: slideDown 0.3s ease-out; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.input-container h3 { margin-top: 0; color: #00897B; text-align: center; text-transform: uppercase; font-size: 16px; margin-bottom: 15px; }
+.btn-create-large, .btn-delete-large { flex: 1; padding: 10px; border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; font-size: 14px; }
+.btn-create-large { background: #00897B; } .btn-delete-large { background: #c62828; }
+.input-field { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+.btn-save { background: #00897B; color: white; padding: 12px; width: 100%; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
+
+/* --- BẢNG TIẾN ĐỘ ÔN TẬP (SRS BOX) --- */
+.srs-box { background: #ffffff; border-radius: 10px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-left: 5px solid #00897B; animation: slideDown 0.3s ease-out; }
+.btn-srs { background: #00897B; color: white; border: none; padding: 10px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 13px; transition: background 0.2s; }
+.btn-srs:active { transform: scale(0.95); background: #00695c; }
+.btn-srs-reset { background: transparent; color: #999; border: 1px solid #ccc; padding: 2px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; margin-left: 10px; }
+.btn-srs-reset:hover { color: #c62828; border-color: #c62828; }
+
+/* --- BẢNG THỐNG KÊ CHI TIẾT --- */
+.stats-heading { color: #4a148c; font-size: 16px; margin: 25px 0 10px 0; border-bottom: 2px solid #eee; padding-bottom: 5px;}
+.stats-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+.stats-table th { background: #00897B; color: white; padding: 10px; text-align: center; border-radius: 4px; font-weight: bold; }
+.stats-table td { padding: 12px 8px; border-bottom: 1px solid #eee; text-align: center; vertical-align: middle; }
+.stats-table tr:hover { background: #f9f9f9; }
+
+.badge-red { background: #ffebee; color: #c62828; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; white-space: nowrap;}
+.badge-orange { background: #fff3e0; color: #e65100; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; white-space: nowrap;}
+.badge-green { background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; white-space: nowrap;}
+.badge-blue { background: #e3f2fd; color: #1565c0; padding: 4px 8px; border-radius: 12px; font-weight: bold; font-size: 12px; white-space: nowrap;}
+
+.btn-goto { background: #00897B; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
+.btn-goto:active { background: #00695c; }
+.btn-goto-tomorrow { background: #1565c0; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
+.btn-goto-tomorrow:active { background: #0d47a1; }
+
+/* --- DANH SÁCH THẺ CHUNG --- */
+.container { padding: 10px; max-width: 800px; margin: 0 auto; }
+.card { background: white; border-radius: 10px; padding: 15px 15px 15px 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 5px solid #00897B; position: relative; }
+.card-index { display: inline-block; color: #00897B; font-weight: bold; margin-right: 8px; font-size: 18px; min-width: 25px; }
+
+.btn-delete-card { position: absolute; top: 5px; right: 5px; width: 24px; height: 24px; border-radius: 50%; background: #ffebee; color: #c62828; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; font-weight: bold; z-index: 10; }
+.btn-delete-card:active { background: #ffcdd2; }
+
+/* Nút phát âm (LOA) */
+.btn-speak { background: #e0f2f1; border: none; font-size: 16px; margin-left: 5px; padding: 4px 8px; border-radius: 50%; cursor: pointer; transition: transform 0.2s; z-index: 10; display: inline-flex; align-items: center; justify-content: center; }
+.btn-speak:active { transform: scale(0.8); background: #b2dfdb; }
+
+/* Thẻ thường */
+.card-kana { color: #4a148c; font-size: 19px; font-weight: bold; margin-bottom: 6px; padding-right: 30px; word-break: break-word; }
+.card-mean { font-size: 16px; color: #444; line-height: 1.5; margin-left: 33px; }
+
+/* --- BỐ CỤC 5 CỘT TỪ VỰNG (Có cột Ví dụ) --- */
+.card-vocab { cursor: pointer; overflow-x: auto; padding: 10px 15px; -webkit-tap-highlight-color: transparent; }
+.grid-5-cols { display: grid; grid-template-columns: 1.8fr 1.4fr 1fr 1.4fr 3.5fr; gap: 15px; align-items: center; min-width: 850px; padding-right: 25px; }
+.grid-header { font-weight: bold; color: #00897B; border-bottom: 2px solid #00897B; padding-bottom: 8px; margin-bottom: 10px; text-align: left; }
+.col-kanji, .col-hira, .col-hv, .col-vn, .col-example { padding: 4px; border-radius: 4px; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+.col-kanji { font-size: 18px; font-weight: bold; color: #4a148c; }
+.col-hira { font-size: 16px; color: #00897B; font-weight: bold; }
+.col-hv { font-size: 14px; color: #757575; font-style: italic; }
+.col-vn { font-size: 16px; color: #d32f2f; }
+
+/* Định dạng cột Ví dụ 2 dòng */
+.col-example { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; line-height: 1.4; border-left: 2px dashed #eee; padding-left: 10px; }
+.ex-jp { font-size: 15px; color: #00897B; font-weight: bold; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.ex-vn { font-size: 14px; color: #555; font-style: italic; }
+
+/* --- BỐ CỤC 4 CỘT NGỮ PHÁP --- */
+.grid-4-cols { display: grid; grid-template-columns: 1.5fr 2fr 2.5fr 2fr; gap: 15px; align-items: start; min-width: 700px; padding-right: 25px; }
+.col-gram-pattern, .col-gram-exp, .col-gram-exjp, .col-gram-exvn { padding: 4px; border-radius: 4px; transition: all 0.2s; display: flex; align-items: flex-start; gap: 5px; line-height: 1.4;}
+.col-gram-pattern { font-size: 18px; font-weight: bold; color: #4a148c; }
+.col-gram-exp { font-size: 15px; color: #333; }
+.col-gram-exjp { font-size: 16px; color: #00897B; font-weight: bold; }
+.col-gram-exvn { font-size: 15px; color: #d32f2f; font-style: italic; }
+
+/* --- HIỆU ỨNG CHE CHỮ (KHỐI XÁM) --- */
+body.hide-kanji .obscured .col-kanji,
+body.hide-hira .obscured .col-hira,
+body.hide-hv .obscured .col-hv,
+body.hide-vn .obscured .col-vn,
+body.hide-example .obscured .col-example,
+body.hide-gram-pattern .obscured .col-gram-pattern,
+body.hide-gram-exp .obscured .col-gram-exp,
+body.hide-gram-exjp .obscured .col-gram-exjp,
+body.hide-gram-exvn .obscured .col-gram-exvn { background-color: #cfd8dc; color: transparent !important; user-select: none; }
+
+/* Xóa màu chữ các phần tử con khi bị che */
+body.hide-example .obscured .col-example * { color: transparent !important; border-color: transparent; }
+
+/* Ẩn luôn cái loa nếu cột bị che để không lộ đáp án */
+body.hide-kanji .obscured .col-kanji .btn-speak,
+body.hide-example .obscured .col-example .btn-speak,
+body.hide-gram-pattern .obscured .col-gram-pattern .btn-speak,
+body.hide-gram-exjp .obscured .col-gram-exjp .btn-speak { display: none; }
+
+/* --- THÔNG BÁO --- */
+#toast { visibility: hidden; min-width: 200px; background-color: rgba(0,0,0,0.8); color: #fff; text-align: center; border-radius: 25px; padding: 12px 20px; position: fixed; z-index: 200; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 15px; }
+#toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+@keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+@keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }

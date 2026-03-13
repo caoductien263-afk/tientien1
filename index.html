@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minna Storage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00897B">
+    <link rel="icon" type="image/png" href="https://img.icons8.com/color/96/japan.png">
+</head>
+<body>
+
+    <div class="header">
+        <select id="selectType" onchange="renderCards()">
+            <option value="tu_vung">Từ Vựng</option>
+            <option value="ngu_phap">Ngữ Pháp</option>
+            <option value="bai_doc">Luyện Đọc</option>
+            <option value="bai_nghe">Luyện Nghe</option>
+            <option value="kanji">Hán Tự</option>
+        </select>
+        
+        <div style="display:flex; flex:1; gap:5px; align-items:center;">
+             <select id="selectLesson" onchange="renderCards()" style="flex:2;"></select>
+            <button class="btn-stats" onclick="toggleStats()" title="Bảng thống kê ôn tập">📊</button>
+            <button class="btn-toggle-eye" onclick="toggleAllObscure()" title="Bật/Tắt che chữ">👁️</button>
+            <button class="btn-settings" onclick="toggleSettings()" title="Cài đặt">⚙️</button>
+            <button class="btn-add" onclick="toggleInput()" title="Nhập liệu">+</button>
+        </div>
+    </div>
+
+    <div id="vocabToolbar" class="vocab-toolbar" style="display:none;">
+        <div class="toolbar-title">Đánh dấu (✓) vào cột bạn muốn CHE khi ôn tập:</div>
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="chk-kanji" onchange="saveSettings()"> Kanji</label>
+            <label><input type="checkbox" id="chk-hira" onchange="saveSettings()"> Hiragana</label>
+            <label><input type="checkbox" id="chk-hv" onchange="saveSettings()"> Hán Việt</label>
+            <label><input type="checkbox" id="chk-vn" onchange="saveSettings()"> Tiếng Việt</label>
+            <label><input type="checkbox" id="chk-ex" onchange="saveSettings()"> Ví dụ</label>
+        </div>
+        <div style="font-size: 12px; color: #555; text-align: center; margin-top: 8px;">
+            💡 Mẹo: Bấm nút 👁️ ở trên để Bật/Tắt che. <b>Chạm vào từng từ để xem đáp án.</b>
+        </div>
+    </div>
+
+    <div id="grammarToolbar" class="vocab-toolbar" style="display:none;">
+        <div class="toolbar-title">Đánh dấu (✓) vào cột bạn muốn CHE khi ôn tập:</div>
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="chk-gram-pattern" onchange="saveSettings()"> Ngữ pháp</label>
+            <label><input type="checkbox" id="chk-gram-exp" onchange="saveSettings()"> Giải thích</label>
+            <label><input type="checkbox" id="chk-gram-exjp" onchange="saveSettings()"> Ví dụ JP</label>
+            <label><input type="checkbox" id="chk-gram-exvn" onchange="saveSettings()"> Ví dụ VN</label>
+        </div>
+        <div style="font-size: 12px; color: #555; text-align: center; margin-top: 8px;">
+            💡 Mẹo: Bấm nút 👁️ ở trên để Bật/Tắt che. <b>Chạm vào thẻ để xem đáp án.</b>
+        </div>
+    </div>
+
+    <div id="statsArea" class="input-container" style="display:none; max-width: 800px;">
+        <h3>📊 Thống Kê & Lịch Ôn Tập</h3>
+        <p style="text-align:center; font-size:13px; color:#555; margin-top:-10px; margin-bottom: 15px;">
+            Lịch ôn tập cố định theo mốc 1-3-7-14-30 ngày kể từ lúc học.
+        </p>
+        <div id="statsContent"></div>
+    </div>
+
+    <div id="settingsArea" class="input-container" style="display:none;">
+        <h3 style="margin-top: 0;">🔊 Phát âm (Audio)</h3>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom: 15px; justify-content: center;">
+            <label style="font-size:14px; font-weight:bold; color:#00695c;">Tốc độ:</label>
+            <input type="range" id="speechSpeed" min="0.5" max="1.5" step="0.1" value="1.0" onchange="saveSettings()">
+            <span id="speedLabel" style="font-size:14px; font-weight:bold; color:#d32f2f;">1.0x</span>
+        </div>
+        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <h3>Quản lý dữ liệu</h3>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+            <button class="btn-save" style="background:#2e7d32;" onclick="exportData()">⬇️ Tải file về máy</button>
+            <button class="btn-save" style="background:#f57c00;" onclick="triggerImport()">⬆️ Nạp file dữ liệu</button>
+        </div>
+        <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+        <h3>Quản lý bài học</h3>
+        <div style="display:flex; gap:10px;">
+             <button class="btn-create-large" onclick="createNewLesson()">📄 Tạo bài mới</button>
+             <button class="btn-delete-large" onclick="deleteCurrentLesson()">🗑️ Xóa bài này</button>
+        </div>
+        <input type="file" id="fileInput" style="display:none" onchange="importData(this)">
+    </div>
+
+    <div id="inputArea" class="input-container" style="display:none;">
+        <h3>Dán danh sách dữ liệu</h3>
+        <div style="font-size: 13px; color: #666; margin-top: -10px; margin-bottom: 10px; line-height: 1.6;">
+            <b>• Từ vựng:</b> Kanji - Hiragana, Hán Việt, Tiếng Việt, Ví dụ JP, Ví dụ VN<br>
+            <b>• Ngữ pháp:</b> Cấu trúc - Giải thích, Ví dụ JP, Ví dụ VN<br>
+            <b>• Các mục khác:</b> Mặt trước - Mặt sau
+        </div>
+        <input type="text" id="inpLesson" class="input-field" placeholder="Bài số (VD: 42)">
+        <textarea id="inpBulk" class="input-field" rows="10" placeholder="VD Từ vựng:
+食べる - たべる, THỰC, ăn, 毎日りんごを食べる, Tôi ăn táo mỗi ngày"></textarea>
+        <button class="btn-save" onclick="saveBulkData()">LƯU DANH SÁCH</button>
+    </div>
+
+    <div class="container" id="contentArea"></div>
+    <div id="toast">Đã thực hiện!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
